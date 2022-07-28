@@ -6,6 +6,8 @@ import java.util.Arrays;
  * [528] 按权重随机选择
  */
 
+// 220728 2刷
+
 // @lc code=start
 class Solution {
 
