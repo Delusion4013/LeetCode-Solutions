@@ -1,8 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.w3c.dom.Node;
-
 /*
  * @lc app=leetcode.cn id=116 lang=java
  *
@@ -35,27 +33,46 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-        // Single queue
-        if (root == null) return root;
-        Queue<Node> queue1 = new LinkedList<>();
-        queue1.offer(root);
-        while (!queue1.isEmpty()) {
-            int curLevelSize = queue1.size();
-            for (int i = 0; i < curLevelSize; i++) {
-                Node tmp = queue1.poll();
-                if (i < curLevelSize - 1) {
-                    tmp.next = queue1.peek();
-                }
-                if (tmp.left != null) {
-                    queue1.offer(tmp.left);
-                    queue1.offer(tmp.right);
-                }
-                
-            }
-        }
+        // Single Traversal
+        if(root == null) return root;
+        traverse(root.left, root.right);
         return root;
     }
+
+    private void traverse(Node l, Node r) {
+        if (l == null || r == null) return;
+
+        l.next = r;
+        traverse(l.left, l.right);
+        traverse(l.right, r.left);
+        traverse(r.left, r.right);
+    }
 }
+
+// class Solution {
+    // public Node connect(Node root) {
+    // Single queue
+        // if (root == null) return root;
+        // Queue<Node> queue1 = new LinkedList<>();
+        // queue1.offer(root);
+        // while (!queue1.isEmpty()) {
+        //     int curLevelSize = queue1.size();
+        //     for (int i = 0; i < curLevelSize; i++) {
+        //         Node tmp = queue1.poll();
+        //         if (i < curLevelSize - 1) {
+        //             tmp.next = queue1.peek();
+        //         }
+        //         if (tmp.left != null) {
+        //             queue1.offer(tmp.left);
+        //             queue1.offer(tmp.right);
+        //         }
+                
+        //     }
+        // }
+        // return root;
+//     }
+// }
+
 
 // class Solution_doubleQueue {
 //     public Node connect(Node root) {
